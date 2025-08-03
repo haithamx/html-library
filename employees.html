@@ -1,22 +1,12 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>دورات {{month}} - {{audience}}</title>
 </head>
 <body>
   <h1>دورات {{month}} - {{audience}}</h1>
 
-  {{#each rows}}
-    <div>
-      <h3>{{this['عنوان الدورة']}}</h3>
-      <p>{{this['تاريخ الدورة']}} - {{this['وقت الدورة']}} - {{this['مكان الدورة']}}</p>
-    </div>
-  {{/each}}
-
-  <div>
-    <h2>احتياطي استبدال</h2>
-    {{COURSES}}
-  </div>
+  {{COURSES}}
 </body>
 </html>
