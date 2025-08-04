@@ -20,22 +20,6 @@
       font-weight: bold;
     }
 
-    :root {
-      --main-color: #0084BD; /* default fallback */
-    }
-
-    body.faculty {
-      --main-color: #004080;
-    }
-
-    body.staff {
-      --main-color: #008000;
-    }
-
-    body.students {
-      --main-color: #800000;
-    }
-
     body {
       margin: 0;
       padding: 0;
@@ -80,7 +64,6 @@
       font-size: 36px;
       margin: 0;
       font-weight: bold;
-      color: var(--main-color);
     }
 
     .page-header .header-text h2 {
@@ -99,11 +82,6 @@
       text-align: center;
       font-size: 16px;
       margin-bottom: 15px;
-    }
-
-    .schedule-table thead {
-      background-color: var(--main-color);
-      color: #fff;
     }
 
     .schedule-table th,
@@ -130,8 +108,8 @@
       background: #fff;
       padding: 20px;
       text-align: center;
-      border-top: 5px solid var(--main-color);
       position: relative;
+      border-top: 5px solid;
     }
 
     .page-footer .info {
@@ -151,6 +129,31 @@
       background-position: center bottom;
       background-size: contain;
       opacity: 0.08;
+    }
+
+    /* ألوان مخصصة حسب الفئة */
+    body.staff .page-header .header-text h1,
+    body.staff .schedule-table thead,
+    body.staff .page-footer {
+      color: #008000;
+      background-color: #008000;
+      border-top-color: #008000;
+    }
+
+    body.faculty .page-header .header-text h1,
+    body.faculty .schedule-table thead,
+    body.faculty .page-footer {
+      color: #004080;
+      background-color: #004080;
+      border-top-color: #004080;
+    }
+
+    body.students .page-header .header-text h1,
+    body.students .schedule-table thead,
+    body.students .page-footer {
+      color: #800000;
+      background-color: #800000;
+      border-top-color: #800000;
     }
   </style>
 </head>
