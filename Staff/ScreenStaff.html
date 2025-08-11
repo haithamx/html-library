@@ -2,9 +2,10 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>إعلان الدورات - شاشة الموظفين</title>
   <style>
+    /* خطوط (اختياري) */
     @font-face {
       font-family: 'GEDinarOne';
       src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Regular.otf') format('opentype');
@@ -14,52 +15,57 @@
       src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Medium.otf') format('opentype');
       font-weight: 500;
     }
-    @font-face {
-      font-family: 'GEDinarOne';
-      src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Bold.otf') format('opentype');
-      font-weight: bold;
+
+    :root{
+      /* عدّل هذه القيم حسب أرقام Figma بالضبط */
+      --box-top: 450px;    /* المسافة من أعلى الشاشة للصندوق */
+      --box-right: 182px;  /* المسافة من يمين الشاشة للصندوق */
+      --box-width: 813px;  /* عرض الصندوق */
+      --box-height: 533px; /* ارتفاع الصندوق */
     }
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'GEDinarOne', Arial, sans-serif;
-      direction: rtl;
+    body{ margin:0; font-family:'GEDinarOne', Arial, sans-serif; direction:rtl; }
+    .stage{
+      width:1920px; height:1038px; margin:0 auto; position:relative; overflow:hidden;
+      background:url('https://github.com/haithamx/html-library/blob/main/Staff/StaffKSUScreen01.png?raw=true') center/cover no-repeat;
     }
 
-    .stage {
-      width: 1920px; /* مقاس الشاشة */
-      height: 1038px;
-      margin: 0 auto;
-      background: url('https://github.com/haithamx/html-library/blob/main/Staff/StaffKSUScreen01.png?raw=true') center/cover no-repeat;
-      position: relative;
-      overflow: hidden;
+    /* الصندوق الذي يتمركز داخله نص الشهر */
+    .month-box{
+      position:absolute;
+      top:var(--box-top);
+      right:var(--box-right);
+      width:var(--box-width);
+      height:var(--box-height);
+      display:grid;               /* لتمركز المحتوى بسهولة */
+      place-items:center;         /* يوسّط أفقياً وعمودياً */
+      /* لإظهار الإطار أثناء الضبط فعّل السطر التالي ثم احذفه */
+      /* outline: 1px dashed rgba(0,0,0,.25); */
     }
 
-    .month-text {
-      position: absolute;
-      top: 70%; /* مبدئي - عدله حسب مكان النص في التصميم */
-      left: 72%;
-      transform: translate(-50%, -50%);
-      color: #748995;
-      font-size: 48px;
-      font-weight: 500;
-      line-height: 140%;
-      letter-spacing: -0.96px;
-      white-space: nowrap;
+    .month-text{
+      color:#748995;
+      font-size:48px;
+      font-weight:500;
+      line-height:140%;
+      letter-spacing:-0.96px;
+      white-space:nowrap;
+      text-align:center;
     }
   </style>
 </head>
 <body>
   <main class="stage">
-    <div class="month-text">لشهر {{month}}</div>
+    <!-- نص الشهر يتمركز تلقائيًا داخل الصندوق المحدد بالأرقام -->
+    <div class="month-box">
+      <div class="month-text">لشهر {{month}}</div>
+    </div>
   </main>
 
-  <!-- لتجربة الشهر في المتصفح -->
+  <!-- للمعاينة السريعة عبر رابط مثل ?m=أغسطس%٢٠٢٥م -->
   <script>
-    (function () {
-      const urlParams = new URLSearchParams(location.search);
-      const m = urlParams.get('m') || 'أكتوبر ٢٠٢٥م';
+    (function(){
+      const m = new URLSearchParams(location.search).get('m') || 'أغسطس ٢٠٢٥م';
       document.querySelector('.month-text').textContent = 'لشهر ' + m;
     })();
   </script>
