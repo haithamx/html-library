@@ -20,32 +20,57 @@
       font-weight: bold;
     }
 
+    /* تحكم سريع بمكان وحجم صندوق الشهر */
+    :root{
+      /* عدّل هذه القيم حسب أرقام Figma بالضبط */
+      --box-top: 450px;    /* المسافة من أعلى الشاشة للصندوق */
+      --box-right: 182px;  /* المسافة من يمين الشاشة للصندوق */
+      --box-width: 813px;  /* عرض الصندوق */
+      --box-height: 533px; /* ارتفاع الصندوق */
+
+      --month-font-size: 48px;   /* حجم نص الشهر */
+      --month-color: #ffffff;    /* لون النص */
+      --month-shadow: 0 2px 6px rgba(0,0,0,.35);
+      --month-weight: 700;
+    }
+
     html,body{ margin:0; padding:0; }
     .canvas{
-      width:1920px; height:1038px; 
-      position:relative; 
-      background: #000 no-repeat center/cover;
+      width:1920px; height:1038px;
+      position:relative;
+      background:#000 no-repeat center/cover;
       background-image: url('{{bgUrl}}'); /* ← n8n سيستبدلها */
       font-family:'GEDinarOne', Arial, sans-serif;
       direction: rtl;
     }
 
-    /* مكان نص الشهر - عدّل الإحداثيات حسب تصميمك */
+    /* صندوق الشهر (يمركز النص داخله) */
+    .month-box{
+      position:absolute;
+      top: var(--box-top);
+      right: var(--box-right);
+      width: var(--box-width);
+      height: var(--box-height);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      pointer-events:none; /* مجرد عرض */
+    }
+
     .month{
-      position:absolute; 
-      top: 120px; 
-      right: 220px;
-      font-size: 48px; 
-      color:#ffffff; 
-      text-shadow: 0 2px 6px rgba(0,0,0,.35);
-      font-weight: 500;
+      font-size: var(--month-font-size);
+      font-weight: var(--month-weight);
+      color: var(--month-color);
+      text-shadow: var(--month-shadow);
       white-space: nowrap;
     }
   </style>
 </head>
 <body>
   <div class="canvas">
-    <div class="month">{{month}}</div>
+    <div class="month-box">
+      <div class="month">{{month}}</div>
+    </div>
   </div>
 </body>
 </html>
