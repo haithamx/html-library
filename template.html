@@ -55,11 +55,20 @@
     .schedule-table tbody tr:hover{ background-color:#e8f0fe; }
     .schedule-table th{ font-weight:bold; }
 
-    /* ألوان حسب الفئة */
-    thead.students th { background:linear-gradient(90deg, #00A65A 0%, #007A3D 100%); color:#fff; }
-    thead.faculty  th { background:linear-gradient(90deg, #007FBA 0%, #005177 100%); color:#fff; }
-    thead.staff    th { background:linear-gradient(90deg, #FF9900 0%, #CC6600 100%); color:#fff; }
-    thead.leader   th { background:linear-gradient(90deg, #8E44AD 0%, #5E3370 100%); color:#fff; }
+
+/* ألوان حسب الفئة */
+.schedule-table thead.staff{
+  background: linear-gradient(90deg, #007FBA 0%, #005177 100%);
+}
+.schedule-table thead.students{
+  background: linear-gradient(90deg, #00AE97 0%, #006D5F 100%);
+}
+.schedule-table thead.leader{
+  background: linear-gradient(180deg, #523527 0%, #74584B 100%);
+}
+.schedule-table thead.faculty{
+  background: linear-gradient(90deg, #748995 0%, #2C3338 100%);
+}
 
     /* الفوتر */
     .page-footer img{ width:100%; display:block; }
