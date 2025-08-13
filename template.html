@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>جدول الدورات</title>
+  <style>
+    @font-face {
+      font-family: 'GEDinarOne';
+      src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Regular.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'GEDinarOne';
+      src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Medium.otf') format('opentype');
+      font-weight: 500;
+    }
+    @font-face {
+      font-family: 'GEDinarOne';
+      src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Bold.otf') format('opentype');
+      font-weight: bold;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      font-family: 'GEDinarOne', Arial, sans-serif;
+      direction: rtl;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .page-wrapper {
+      width: 906px;
+      margin: 0 auto;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    /* الهيدر */
+    .page-header {
+      position: relative;
+      width: 100%;
+    }
+    .page-header img {
+      width: 100%;
+      display: block;
+    }
+    .page-header .month-text {
+      position: absolute;
+      top: 60%; /* مبدئي، تقدر تعدله التاريخ */
+      left: 25%;
+      transform: translate(-50%, -50%);
+      color: #898989;
+      font-size: 22px;
+      font-weight: Regular;
+      white-space: nowrap;
+    }
+
+    /* الجدول */
+    .schedule-container {
+      padding: 20px;
+    }
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+/* العناوين */
+.schedule-table thead {
+  background: linear-gradient(90deg, #007FBA 0%, #005177 100%);
+  color: #fff;
+}
+    .schedule-table th,
+    .schedule-table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+    }
+    .schedule-table thead th {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .schedule-table tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    .schedule-table tbody tr:hover {
+      background-color: #e8f0fe;
+    }
+    .schedule-table th {
+      font-weight: bold;
+    }
+
+    /* الفوتر */
+    .page-footer img {
+      width: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- الهيدر -->
+    <div class="page-header">
+      <img src="https://github.com/haithamx/html-library/blob/main/Staff/HeaderStaff01.png?raw=true" alt="الهيدر">
+      <div class="month-text">لشهر {{month}}</div>
+    </div>
+
+    <!-- الجدول -->
+    <div class="schedule-container">
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>م</th>
+            <th>عنوان الدورة</th>
+            <th>وقت الدورة</th>
+            <th>تاريخ الدورة</th>
+            <th>مكان الدورة</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${tbody}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- الفوتر -->
+    <div class="page-footer">
+      <img src="https://github.com/haithamx/html-library/blob/main/Staff/footerStaff01.png?raw=true" alt="الفوتر">
+    </div>
+  </div>
+</body>
+</html>
