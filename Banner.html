@@ -29,29 +29,43 @@
       background-image: url('{{bgUrl}}'); /* سيستبدلها n8n */
       font-family: 'GEDinarOne', Arial, sans-serif;
       direction: rtl;
+      overflow: hidden;
     }
 
-    /* صندوق الشهر (اختياري) */
+    /* منطقة نص الشهر من ملفك القديم */
     :root{
-      /* عدّل هذه القيم لموضع الشهر على البانر */
-      --month-top: 520px;
-      --month-right: 180px;
+      --box-left: 1240px;
+      --box-top: 390px;
+      --box-width: 520px;
+      --box-height: 52px;
     }
-    .month {
-      position: absolute;
-      top: var(--month-top);
-      right: var(--month-right);
-      font-size: 44px;
-      font-weight: 400;       /* Regular */
-      color: #748995;         /* تقدر تغيّره */
-      /* بدون ظل */
+    .month-box{
+      position:absolute;
+      left:var(--box-left);
+      top:var(--box-top);
+      width:var(--box-width);
+      height:var(--box-height);
+      display:grid;
+      place-items:center;
     }
-    .month:empty { display:none; } /* لو ما فيه شهر ينخفي تلقائياً */
+    .month-text{
+      color:#748995;
+      font-size:36px;
+      font-weight:500; /* Medium */
+      font-style: normal;
+      line-height:140%;
+      letter-spacing:-0.72px;
+      white-space:nowrap;
+      text-align:center;
+    }
+    .month-text:empty { display:none; }
   </style>
 </head>
 <body>
   <div class="banner">
-    <div class="month">{{month}}</div>
+    <div class="month-box">
+      <div class="month-text">لشهر {{month}}</div>
+    </div>
   </div>
 </body>
 </html>
