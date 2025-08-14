@@ -5,26 +5,33 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>إرسال طلب التصاميم</title>
   <style>
-    body{font-family:system-ui,Arial; background:#f7f7f7; margin:0; padding:24px; direction:rtl}
-    .card{max-width:720px; margin:auto; background:#fff; padding:20px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,.06)}
-    h1{margin:0 0 16px}
+    :root{
+      --bg:#f7f7f7; --card:#fff; --text:#111; --muted:#666; --brand:#0ea5e9; --border:#e5e7eb;
+    }
+    *{box-sizing:border-box}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial; background:var(--bg); margin:0; padding:24px; color:var(--text); direction:rtl}
+    .card{max-width:780px; margin:auto; background:var(--card); padding:22px; border-radius:14px; box-shadow:0 6px 24px rgba(0,0,0,.06); border:1px solid var(--border)}
+    h1{margin:0 0 16px; font-size:1.35rem}
     .row{display:flex; gap:16px; flex-wrap:wrap}
-    .col{flex:1 1 260px; min-width:260px}
-    label{display:block; font-weight:600; margin:12px 0 6px}
+    .col{flex:1 1 280px; min-width:260px}
+    label{display:block; font-weight:700; margin:12px 0 6px}
     input[type="text"], input[type="email"], select{
-      width:100%; padding:10px; border:1px solid #ddd; border-radius:8px;
+      width:100%; padding:11px 12px; border:1px solid var(--border); border-radius:10px; outline:none;
     }
-    .checks{display:grid; gap:8px}
-    .checks label{font-weight:500}
-    .file{border:1px dashed #bbb; padding:12px; border-radius:8px; background:#fafafa}
+    input:focus, select:focus{border-color:var(--brand)}
+    .checks{display:grid; gap:8px; margin-top:4px}
+    .checks label{font-weight:600}
+    .file{border:1px dashed #cbd5e1; padding:14px; border-radius:10px; background:#fafafa}
+    .hint{color:var(--muted); font-size:.9rem}
+    .row-inline{display:flex; align-items:center; gap:8px; color:var(--muted); font-size:.9rem; margin-top:6px}
     button{
-      margin-top:18px; padding:12px 18px; border:0; border-radius:10px; cursor:pointer;
-      background:#0ea5e9; color:#fff; font-weight:700
+      margin-top:18px; padding:12px 18px; border:0; border-radius:12px; cursor:pointer;
+      background:var(--brand); color:#fff; font-weight:800; font-size:1rem
     }
-    .hint{color:#666; font-size:.9rem}
   </style>
 </head>
 <body>
+  <!-- بدّل الرابط لو احتجت: استخدم Production URL -->
   <form class="card" action="https://aihaitham.app.n8n.cloud/webhook/dsd/submit" method="POST" enctype="multipart/form-data">
     <h1>إرسال طلب التصاميم</h1>
 
@@ -32,17 +39,17 @@
       <div class="col">
         <label for="audience">الفئة المستهدفة</label>
         <select id="audience" name="audience" required>
-          <option value="Staff">Staff — الموظفين</option>
-          <option value="Students">Students — الطلاب</option>
-          <option value="Faculty">Faculty — أعضاء هيئة التدريس</option>
-          <option value="Leader">Leader — القيادات</option>
+          <option value="Staff">الموظفين (Staff)</option>
+          <option value="Students">الطلاب (Students)</option>
+          <option value="Faculty">أعضاء هيئة التدريس (Faculty)</option>
+          <option value="Leader">القيادات (Leader)</option>
         </select>
       </div>
 
       <div class="col">
         <label for="month">الشهر (نص حر)</label>
         <input id="month" name="month" type="text" placeholder="مثال: سبتمبر 2025م" />
-        <div class="hint">لو تركته فاضي، نحاول نستخرجه من أول تاريخ في الجدول.</div>
+        <div class="hint">لو تركته فاضي، نأخذ أول تاريخ من الجدول داخل الإكسل.</div>
       </div>
     </div>
 
@@ -52,7 +59,7 @@
         <div class="checks">
           <label><input type="checkbox" name="versions[]" value="table" checked> نسخة الجدول</label>
           <label><input type="checkbox" name="versions[]" value="screen_full"> نسخة الشاشات</label>
-          <label><input type="checkbox" name="versions[]" value="social_700"> نسخة تواصل (البوست/الإيميل)</label>
+          <label><input type="checkbox" name="versions[]" value="social_700"> نسخة تواصل (بوست/إيميل)</label>
           <label><input type="checkbox" name="versions[]" value="site_banner"> بنر الموقع</label>
         </div>
       </div>
@@ -60,16 +67,20 @@
       <div class="col">
         <label for="email">إيميل الاستلام</label>
         <input id="email" name="email" type="email" placeholder="name@example.com" required />
+        <div class="row-inline">
+          <input id="copyme" type="checkbox" name="cc_me" value="1" />
+          <label for="copyme" style="margin:0;font-weight:600">أرسل لي نسخة على الإيميل</label>
+        </div>
       </div>
     </div>
 
     <div class="row">
       <div class="col">
-        <label for="excel">ملف الإكسل (Excel)</label>
+        <label for="excel">ملف الإكسل (Excel / CSV)</label>
         <div class="file">
           <input id="excel" name="excel" type="file" accept=".xlsx,.xls,.csv" required />
         </div>
-        <div class="hint">يكفي الجدول: عنوان الدورة / وقت الدورة / تاريخ الدورة / مكان الدورة.</div>
+        <div class="hint">يكفي الجدول بالأعمدة: عنوان الدورة / وقت الدورة / تاريخ الدورة / مكان الدورة.</div>
       </div>
     </div>
 
