@@ -35,7 +35,7 @@
   }
   .header{
     height:200px;
-    background-image:url('{{headerUrl}}'); /* ← يستبدلها n8n */
+    background-image:url('{{headerUrl}}'); /* ← n8n سيستبدلها */
     position:relative;
     display:flex; align-items:flex-end; justify-content:center;
     padding-bottom:16px;
@@ -46,7 +46,7 @@
   }
   .footer{
     height:120px;
-    background-image:url('{{footerUrl}}'); /* ← يستبدلها n8n */
+    background-image:url('{{footerUrl}}'); /* ← n8n سيستبدلها */
     margin-top:10px;
   }
 
@@ -67,7 +67,6 @@
 </style>
 </head>
 
-<!-- مهم: نعطي الـ body كلاس ديناميكي -->
 <body class="{{audienceClass}}">
   <div class="header">
     <div class="month">{{month}}</div>
