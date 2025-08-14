@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>اختبار رفع ملف Excel</title>
+<style>
+  body { font-family: Tahoma, sans-serif; padding: 20px; direction: rtl; }
+  label { display: block; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<h2>نموذج رفع ملف Excel للاختبار</h2>
+<form action="https://aihaitham.app.n8n.cloud/webhook-test/dsd/submit" method="post" enctype="multipart/form-data">
+
+  <label>ملف Excel:
+    <input type="file" name="excel" accept=".xlsx,.xls" required>
+  </label>
+
+  <label>الفئة المستهدفة:
+    <select name="audience">
+      <option value="القيادات الإدارية والأكاديمية">القيادات الإدارية والأكاديمية</option>
+      <option value="أعضاء هيئة التدريس">أعضاء هيئة التدريس</option>
+      <option value="الموظفين">الموظفين</option>
+      <option value="الطلاب">الطلاب</option>
+    </select>
+  </label>
+
+  <label>الشهر:
+    <input type="text" name="month" placeholder="أغسطس 2025">
+  </label>
+
+  <label>النسخ المطلوبة:</label>
+  <label><input type="checkbox" name="versions[]" value="Table"> جدول</label>
+  <label><input type="checkbox" name="versions[]" value="Screen"> شاشة</label>
+  <label><input type="checkbox" name="versions[]" value="Tawasl"> تواصل</label>
+  <label><input type="checkbox" name="versions[]" value="Banner"> بانر</label>
+
+  <label>الإيميل (اختياري):
+    <input type="email" name="email" placeholder="example@domain.com">
+  </label>
+
+  <br>
+  <button type="submit">إرسال</button>
+</form>
+
+</body>
+</html>
