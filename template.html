@@ -58,11 +58,11 @@
     border:1px solid #DDD; padding:10px; text-align:center; vertical-align:middle;
   }
 
-  /* ألوان العناوين حسب الفئة (classes صغيرة لتطابق كودك) */
-  body.staff thead { background: linear-gradient(90deg, #007FBA 0%, #005177 100%); color:#fff; }
-  body.students thead { background: linear-gradient(90deg, #00AE97 0%, #006D5F 100%); color:#fff; }
-  body.leader thead { background: linear-gradient(180deg, #523527 0%, #74584B 100%); color:#fff; }
-  body.faculty thead { background: linear-gradient(90deg, #748995 0%, #2C3338 100%); color:#fff; }
+/* ألوان عناوين الجدول حسب الفئة */
+body.staff    thead, body.staff    tr.head { background: linear-gradient(90deg, #007FBA 0%, #005177 100%); color:#fff; }
+body.students thead, body.students tr.head { background: linear-gradient(90deg, #00AE97 0%, #006D5F 100%); color:#fff; }
+body.leader   thead, body.leader   tr.head { background: linear-gradient(180deg, #523527 0%, #74584B 100%); color:#fff; }
+body.faculty  thead, body.faculty  tr.head { background: linear-gradient(90deg, #748995 0%, #2C3338 100%); color:#fff; }
 
   /* سطر العناوين يطابق عدد أعمدة الـ tbody (5) */
   thead th:first-child { width:48px; }
