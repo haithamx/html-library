@@ -28,7 +28,6 @@
     width:var(--w);
   }
 
-  /* الهيدر والفوتر بصور ديناميكية */
   .header, .footer{
     width:100%;
     background-repeat:no-repeat;
@@ -36,7 +35,7 @@
   }
   .header{
     height:200px;
-    background-image:url('{{headerUrl}}'); /* ← n8n سيستبدلها */
+    background-image:url('{{headerUrl}}'); /* ← يستبدلها n8n */
     position:relative;
     display:flex; align-items:flex-end; justify-content:center;
     padding-bottom:16px;
@@ -47,7 +46,7 @@
   }
   .footer{
     height:120px;
-    background-image:url('{{footerUrl}}'); /* ← n8n سيستبدلها */
+    background-image:url('{{footerUrl}}'); /* ← يستبدلها n8n */
     margin-top:10px;
   }
 
@@ -58,16 +57,17 @@
     border:1px solid #DDD; padding:10px; text-align:center; vertical-align:middle;
   }
 
-/* ألوان عناوين الجدول حسب الفئة */
-body.staff    thead, body.staff    tr.head { background: linear-gradient(90deg, #007FBA 0%, #005177 100%); color:#fff; }
-body.students thead, body.students tr.head { background: linear-gradient(90deg, #00AE97 0%, #006D5F 100%); color:#fff; }
-body.leader   thead, body.leader   tr.head { background: linear-gradient(180deg, #523527 0%, #74584B 100%); color:#fff; }
-body.faculty  thead, body.faculty  tr.head { background: linear-gradient(90deg, #748995 0%, #2C3338 100%); color:#fff; }
+  /* ألوان عناوين الجدول حسب الفئة */
+  body.staff    thead, body.staff    thead th    { background: linear-gradient(90deg, #007FBA 0%, #005177 100%); color:#fff; }
+  body.students thead, body.students thead th    { background: linear-gradient(90deg, #00AE97 0%, #006D5F 100%); color:#fff; }
+  body.leader   thead, body.leader   thead th    { background: linear-gradient(180deg, #523527 0%, #74584B 100%); color:#fff; }
+  body.faculty  thead, body.faculty  thead th    { background: linear-gradient(90deg, #748995 0%, #2C3338 100%); color:#fff; }
 
-  /* سطر العناوين يطابق عدد أعمدة الـ tbody (5) */
   thead th:first-child { width:48px; }
 </style>
 </head>
+
+<!-- مهم: نعطي الـ body كلاس ديناميكي -->
 <body class="{{audienceClass}}">
   <div class="header">
     <div class="month">{{month}}</div>
