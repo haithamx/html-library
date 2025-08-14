@@ -1,106 +1,85 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>جدول الدورات</title>
 <style>
   @font-face {
-    font-family: 'GE Dinar One';
-    src: url('https://raw.githubusercontent.com/YourGitHub/fonts/GE-Dinar-One-Regular.woff2') format('woff2'),
-         url('https://raw.githubusercontent.com/YourGitHub/fonts/GE-Dinar-One-Regular.woff') format('woff');
-    font-weight: normal;
+    font-family: 'GEDinarOne';
+    src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Regular.otf') format('opentype');
+    font-weight: 400;
   }
   @font-face {
-    font-family: 'GE Dinar One';
-    src: url('https://raw.githubusercontent.com/YourGitHub/fonts/GE-Dinar-One-Medium.woff2') format('woff2'),
-         url('https://raw.githubusercontent.com/YourGitHub/fonts/GE-Dinar-One-Medium.woff') format('woff');
+    font-family: 'GEDinarOne';
+    src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Medium.otf') format('opentype');
     font-weight: 500;
   }
   @font-face {
-    font-family: 'GE Dinar One';
-    src: url('https://raw.githubusercontent.com/YourGitHub/fonts/GE-Dinar-One-Bold.woff2') format('woff2'),
-         url('https://raw.githubusercontent.com/YourGitHub/fonts/GE-Dinar-One-Bold.woff') format('woff');
-    font-weight: bold;
+    font-family: 'GEDinarOne';
+    src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Bold.otf') format('opentype');
+    font-weight: 700;
   }
 
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'GE Dinar One', sans-serif;
-    background-color: #fff;
-    width: 906px;
+  :root{ --w:906px; }
+
+  body{
+    margin:0; padding:0; background:#fff;
+    font-family:'GEDinarOne', Arial, sans-serif;
+    width:var(--w);
   }
 
-  .header {
-    width: 100%;
-    height: auto;
-    background-image: url('https://raw.githubusercontent.com/YourGitHub/images/HeaderStaff01.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    text-align: center;
-    padding: 20px 0;
-    color: white;
-    font-size: 32px;
-    font-weight: bold;
+  /* الهيدر والفوتر بصور ديناميكية */
+  .header, .footer{
+    width:100%;
+    background-repeat:no-repeat;
+    background-size:cover;
+  }
+  .header{
+    height:200px;
+    background-image:url('{{headerUrl}}'); /* ← n8n سيستبدلها */
+    position:relative;
+    display:flex; align-items:flex-end; justify-content:center;
+    padding-bottom:16px;
+  }
+  .header .month{
+    background:rgba(0,0,0,.45);
+    color:#fff; padding:8px 16px; border-radius:10px; font-size:24px; font-weight:500;
+  }
+  .footer{
+    height:120px;
+    background-image:url('{{footerUrl}}'); /* ← n8n سيستبدلها */
+    margin-top:10px;
   }
 
-  .header span {
-    background-color: rgba(0,0,0,0.5);
-    padding: 10px 20px;
-    border-radius: 10px;
+  table{
+    width:100%; border-collapse:collapse; margin-top:10px; font-size:18px;
+  }
+  thead th, tbody td{
+    border:1px solid #DDD; padding:10px; text-align:center; vertical-align:middle;
   }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    font-size: 18px;
-  }
+  /* ألوان العناوين حسب الفئة (classes صغيرة لتطابق كودك) */
+  body.staff thead { background: linear-gradient(90deg, #007FBA 0%, #005177 100%); color:#fff; }
+  body.students thead { background: linear-gradient(90deg, #00AE97 0%, #006D5F 100%); color:#fff; }
+  body.leader thead { background: linear-gradient(180deg, #523527 0%, #74584B 100%); color:#fff; }
+  body.faculty thead { background: linear-gradient(90deg, #748995 0%, #2C3338 100%); color:#fff; }
 
-  thead {
-    background: linear-gradient(90deg, #007FBA, #005177);
-    color: white;
-  }
-
-  thead th {
-    padding: 12px;
-    text-align: center;
-  }
-
-  tbody td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-    vertical-align: middle;
-  }
-
-  .footer {
-    width: 100%;
-    height: auto;
-    background-image: url('https://raw.githubusercontent.com/YourGitHub/images/footerStaff01.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin-top: 10px;
-    height: 120px;
-  }
-
-  /* ألوان مختلفة لكل فئة */
-  .Staff thead { background: linear-gradient(90deg, #007FBA, #005177); }
-  .Faculty thead { background: linear-gradient(90deg, #BA7F00, #775100); }
-  .Students thead { background: linear-gradient(90deg, #00994D, #006633); }
-  .Leader thead { background: linear-gradient(90deg, #660099, #440066); }
-
+  /* سطر العناوين يطابق عدد أعمدة الـ tbody (5) */
+  thead th:first-child { width:48px; }
 </style>
 </head>
 <body class="{{audienceClass}}">
-  <div class="header"><span>{{month}}</span></div>
+  <div class="header">
+    <div class="month">{{month}}</div>
+  </div>
 
   <table>
     <thead>
       <tr>
+        <th>#</th>
         <th>عنوان الدورة</th>
-        <th>تاريخ الدورة</th>
         <th>وقت الدورة</th>
+        <th>تاريخ الدورة</th>
         <th>مكان الدورة</th>
       </tr>
     </thead>
