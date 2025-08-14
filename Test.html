@@ -34,7 +34,7 @@
   .header {
     width: 100%;
     height: auto;
-    background-image: url('https://raw.githubusercontent.com/YourGitHub/images/HeaderStaff01.png');
+    background-image: url('{{headerUrl}}'); /* ← ديناميكي */
     background-repeat: no-repeat;
     background-size: cover;
     text-align: center;
@@ -77,14 +77,14 @@
   .footer {
     width: 100%;
     height: auto;
-    background-image: url('https://raw.githubusercontent.com/YourGitHub/images/footerStaff01.png');
+    background-image: url('{{footerUrl}}'); /* ← ديناميكي */
     background-repeat: no-repeat;
     background-size: cover;
     margin-top: 10px;
     height: 120px;
   }
 
-  /* ألوان مختلفة لكل فئة */
+  /* ألوان مختلفة لكل فئة (TitleCase) */
   .Staff thead { background: linear-gradient(90deg, #007FBA, #005177); }
   .Faculty thead { background: linear-gradient(90deg, #BA7F00, #775100); }
   .Students thead { background: linear-gradient(90deg, #00994D, #006633); }
