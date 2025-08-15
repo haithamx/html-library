@@ -35,28 +35,26 @@
     direction: rtl;
   }
 
-  /* الهيدر (صورة خلفية ديناميكية + نص الشهر داخلها) */
+  /* الهيدر (يظهر الصورة كاملة حسب أبعادها 2380×604) */
   .header {
     position: relative;
     width: 100%;
-    height: 160px; /* مقاسك القديم؛ غيّره لو صورك مختلفة */
+    aspect-ratio: 2380/604;       /* يحافظ على النسبة بدقّة */
+    height: auto;                 /* يُحسب تلقائياً (~230px عند عرض 906px) */
     background-image: url('{{headerUrl}}');
     background-repeat: no-repeat;
-    background-size: cover;      /* بدّلها إلى contain لو تبغى الصورة كاملة بدون قص */
+    background-size: contain;     /* يظهر الصورة كاملة بدون قص */
     background-position: center top;
   }
+  /* نص الشهر داخل الهيدر */
   .header .month-text {
     position: absolute;
-    top: 60%; /* عدّل موضع النص حسب تصميمك */
-    left: 25%;
+    top: 60%; left: 25%;
     transform: translate(-50%, -50%);
     color: #898989;
     font-size: 22px;
     font-weight: 500;
     white-space: nowrap;
-    background: rgba(0,0,0,0.0); /* بلا خلفية */
-    padding: 0;
-    border-radius: 0;
   }
 
   /* الجدول */
@@ -68,7 +66,7 @@
     text-align: center;
   }
 
-  /* تدرّجات العناوين حسب الفئة (TitleCase على <body>) */
+  /* تدرجات العناوين حسب الفئة */
   body.Staff thead    { background: linear-gradient(90deg, #007FBA, #005177); color: #fff; }
   body.Faculty thead  { background: linear-gradient(90deg, #BA7F00, #775100); color: #fff; }
   body.Students thead { background: linear-gradient(90deg, #00AE97, #006D5F); color: #fff; }
@@ -91,13 +89,14 @@
   tbody tr:nth-child(even) { background-color: #f9f9f9; }
   tbody tr:hover { background-color: #e8f0fe; }
 
-  /* الفوتر (صورة خلفية ديناميكية) */
+  /* الفوتر (نفس الفكرة – لو كان للفوتر أبعاد مختلفة عدّل الـaspect-ratio) */
   .footer {
     width: 100%;
-    height: 120px; /* مقاسك القديم */
+    aspect-ratio: 2380/604;       /* مؤقتاً نفس النسبة؛ عدّلها لأبعاد الفوتر الفعلية */
+    height: auto;
     background-image: url('{{footerUrl}}');
     background-repeat: no-repeat;
-    background-size: cover;      /* بدّلها إلى contain لو تبغى الصورة كاملة بدون قص */
+    background-size: contain;     /* يظهر كامل بدون قص */
     background-position: center bottom;
     margin-top: 10px;
   }
