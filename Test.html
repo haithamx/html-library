@@ -90,16 +90,17 @@
   tbody tr:hover { background-color: #e8f0fe; }
 
   /* الفوتر (نفس الفكرة – لو كان للفوتر أبعاد مختلفة عدّل الـaspect-ratio) */
-  .footer {
-    width: 100%;
-    aspect-ratio: 2380/604;       /* مؤقتاً نفس النسبة؛ عدّلها لأبعاد الفوتر الفعلية */
-    height: auto;
-    background-image: url('{{footerUrl}}');
-    background-repeat: no-repeat;
-    background-size: contain;     /* يظهر كامل بدون قص */
-    background-position: center bottom;
-    margin-top: 0;
-  }
+ .footer {
+  width: 100%;
+  aspect-ratio: 2380/604;      /* أو نسبة الفوتر الحقيقية */
+  height: auto;
+  background-image: url('{{footerUrl}}');
+  background-repeat: no-repeat;
+  background-size: contain;    /* يظهر الصورة كاملة */
+  background-position: top center; /* مهم: خلّ البداية من أعلى */
+  margin-top: 0;               /* كان 10px */
+}
+
 </style>
 </head>
 
