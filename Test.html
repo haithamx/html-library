@@ -5,21 +5,34 @@
 <title>جدول الدورات</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <style>
-  /* خطوط */
- @font-face {
-      font-family: 'GEDinarOne';
-      src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Regular.otf') format('opentype');
-    }
-    @font-face {
-      font-family: 'GEDinarOne';
-      src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Medium.otf') format('opentype');
-      font-weight: 500;
-    }
-    @font-face {
-      font-family: 'GEDinarOne';
-      src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Bold.otf') format('opentype');
-      font-weight: bold;
-    }
+ /* خطوط GE Dinar One مع مسارات عبر jsDelivr (أولوية: woff2 -> woff -> otf) */
+@font-face{
+  font-family: 'GEDinarOne';
+  src:
+    url('https://cdn.jsdelivr.net/gh/haithamx/my-fonts@main/GE-Dinar-One-Regular.woff2') format('woff2'),
+    url('https://cdn.jsdelivr.net/gh/haithamx/my-fonts@main/GE-Dinar-One-Regular.woff') format('woff'),
+    url('https://cdn.jsdelivr.net/gh/haithamx/my-fonts@main/GE-Dinar-One-Regular.otf') format('opentype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face{
+  font-family: 'GEDinarOne';
+  src:
+    url('https://cdn.jsdelivr.net/gh/haithamx/my-fonts@main/GE-Dinar-One-Medium.woff2') format('woff2'),
+    url('https://cdn.jsdelivr.net/gh/haithamx/my-fonts@main/GE-Dinar-One-Medium.woff') format('woff'),
+    url('https://cdn.jsdelivr.net/gh/haithamx/my-fonts@main/GE-Dinar-One-Medium.otf') format('opentype');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face{
+  font-family: 'GEDinarOne';
+  src:
+    url('https://cdn.jsdelivr.net/gh/haithamx/my-fonts@main/GE-Dinar-One-Bold.woff2') format('woff2'),
+    url('https://cdn.jsdelivr.net/gh/haithamx/my-fonts@main/GE-Dinar-One-Bold.woff') format('woff'),
+    url('https://cdn.jsdelivr.net/gh/haithamx/my-fonts@main/GE-Dinar-One-Bold.otf') format('opentype');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+/* استخدم نفس الاسم بالضبط */
+body, thead th, tbody td { font-family: 'GEDinarOne', Arial, sans-serif; }
 
   /* ====== أساسيات الصفحة ====== */
   html, body { margin: 0; padding: 0; }
