@@ -60,9 +60,10 @@ body, thead th, tbody td { font-family: 'GEDinarOne', Arial, sans-serif; }
     white-space: nowrap;
   }
 
-  /* ====== الجدول ====== */
+   /* ====== الجدول ====== */
   table {
-    width: 100%;
+    width: calc(100% - 24px);   /* نقصنا العرض علشان نخلي فيه فراغ */
+    margin: 10px 12px;          /* قاب يمين ويسار */
     border-collapse: collapse;
     margin-top: 10px;
     font-size: 16px;
@@ -110,7 +111,6 @@ body, thead th, tbody td { font-family: 'GEDinarOne', Arial, sans-serif; }
 </head>
 
 <body class="{{audienceClass}}">
-<div style="padding: 0 20px;"> <!-- غلاف يحط الهوامش يمين ويسار -->
   <!-- الهيدر -->
   <div class="header">
     <div class="month-text">لشهر {{month}}</div>
