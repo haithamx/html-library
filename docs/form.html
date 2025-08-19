@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<title>نموذج الطلب</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<style>
+  /* ====== خطوط GE Dinar One ====== */
+  @font-face {
+    font-family: 'GEDinarOne';
+    src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Regular.otf') format('opentype');
+    font-weight: normal; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'GEDinarOne';
+    src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Medium.otf') format('opentype');
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'GEDinarOne';
+    src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Bold.otf') format('opentype');
+    font-weight: bold; font-style: normal; font-display: swap;
+  }
+
+  :root{
+    --brand:#007FBA; --brand-dark:#005177;
+    --card:#ffffff; --text:#0b2239; --muted:#5e6b76; --radius:22px;
+  }
+
+  html,body{height:100%}
+  body{
+    margin:0; padding:0;
+    font-family: 'GEDinarOne', Arial, sans-serif;
+    background: var(--brand); color: var(--text);
+    display:grid; place-items:center;
+  }
+
+  .card{
+    width:min(720px, 92vw);
+    background:var(--card);
+    border-radius: var(--radius);
+    box-shadow: 0 18px 40px rgba(0,0,0,.18);
+    position:relative;
+    padding: 18px 18px 16px; /* قلّلنا التوب لأن فيه بنر */
+  }
+
+  /* ===== بنر علوي قابل للتبديل ===== */
+  .banner{
+    width:100%;
+    border-radius:16px;
+    overflow:hidden;
+    background:#f1f3f5;
+    /* اختياري: تثبيت نسبة العرض/الارتفاع مع قص ذكي */
+    aspect-ratio: 16 / 5;         /* غيّرها 16/6 أو احذفها لو تبي الارتفاع حسب الصورة */
+  }
+  .banner img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;              /* يقص زيادة الطول/العرض ويحافظ على جمالية البنر */
+  }
+
+  form{ display:grid; gap:14px; margin-top:16px; }
+  label{ font-size:14px; color:var(--muted); font-weight:500; }
+
+  .field{
+    background:#f7fafc; border:1px solid #e6eef5;
+    border-radius:12px; padding:12px 14px;
+  }
+  .row{ display:grid; gap:8px; }
+
+  input[type="file"],
+  input[type="text"],
+  input[type="email"],
+  select{
+    width:100%; font-family:inherit; font-size:15px;
+    border:none; background:transparent; outline:none;
+  }
+
+  .checks{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:10px; }
+  .check{
+    display:flex; align-items:center; gap:8px;
+    background:#f7fafc; border:1px solid #e6eef5;
+    border-radius:12px; padding:10px 12px; font-size:15px;
+  }
+  .check input{ transform: scale(1.15); }
+
+  .actions{ display:flex; justify-content:center; margin-top:4px; }
+  button[type="submit"]{
+    background: linear-gradient(90deg, var(--brand) 0%, var(--brand-dark) 100%);
+    color:#fff; border:none; border-radius:14px;
+    padding:12px 22px; font-size:16px; cursor:pointer;
+    box-shadow:0 8px 18px rgba(0,0,0,.20);
+    transition: transform .05s ease-in-out, opacity .2s;
+    font-family:'GEDinarOne', sans-serif;
+  }
+  button[type="submit"]:active{ transform:scale(.99) }
+  button[type="submit"]:disabled{ opacity:.6; cursor:not-allowed }
+
+  @media (max-width:460px){ .checks{ grid-template-columns: 1fr; } }
+
+  /* ===== Footer داخل الكارد ===== */
+  .divider{ height:1px; background:#e6eef5; margin:16px 0 10px; }
+  .card-footer{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:10px; flex-wrap:wrap;
+  }
+  .btn-link{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:9px 14px; border-radius:12px; border:2px solid var(--brand);
+    background:#fff; color:var(--brand); font-size:14px; text-decoration:none;
+    font-family:'GEDinarOne', sans-serif; font-weight:500;
+    transition: all .2s ease-in-out;
+  }
+  .btn-link:hover{ background:var(--brand); color:#fff; }
+  .btn-link img{ height:18px; display:block; }
+
+  .version{
+    font-size:12px; color:#7a8894;
+    font-family: Arial, sans-serif;   /* أرقام إنجليزية */
+    direction: ltr; unicode-bidi: plaintext;
+  }
+
+  /* ===== Overlay أثناء الإرسال ===== */
+  .overlay{
+    position:fixed; inset:0; background:rgba(11,34,57,.45);
+    display:none; place-items:center; z-index:9999; backdrop-filter: blur(2px);
+  }
+  .overlay.show{ display:grid; }
+  .dialog{
+    background:#fff; border-radius:18px; padding:22px 26px; width:min(360px, 88vw);
+    box-shadow:0 18px 40px rgba(0,0,0,.25); text-align:center;
+  }
+  .spinner{
+    width:36px; height:36px; margin:0 auto 12px;
+    border:4px solid #e6eef5; border-top-color: var(--brand);
+    border-radius:50%; animation: spin 1s linear infinite;
+  }
+  @keyframes spin{ to{ transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <!-- ===== البنر (غيّر رابط الصورة هنا) ===== -->
+    <div class="banner">
+      <img src="https://raw.githubusercontent.com/haithamx/html-library/refs/heads/main/Br01.png" alt="Banner">
+      <!-- استبدل الرابط بصورة البنر التي تصممها -->
+      <!-- ملاحظة: لو حاب الارتفاع يتبع الصورة بدون قص، احذف خاصية aspect-ratio من .banner -->
+    </div>
+
+    <!-- الفورم -->
+    <form id="reqForm" action="https://aihaitham.app.n8n.cloud/webhook-test/dsd/submit" method="post" enctype="multipart/form-data">
+      <div class="row">
+        <label>ملف Excel</label>
+        <div class="field">
+          <input type="file" name="excel" accept=".xlsx,.xls" required />
+        </div>
+      </div>
+
+      <div class="row">
+        <label>الفئة المستهدفة</label>
+        <div class="field">
+          <select name="audience">
+            <option value="القيادات الإدارية والأكاديمية">القيادات الإدارية والأكاديمية</option>
+            <option value="أعضاء هيئة التدريس">أعضاء هيئة التدريس</option>
+            <option value="الموظفين">الموظفين</option>
+            <option value="الطلاب">الطلاب</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <label>الشهر</label>
+        <div class="field">
+          <input type="text" name="month" placeholder="أغسطس 2025م" />
+        </div>
+      </div>
+
+      <div class="row">
+        <label>النسخ المطلوبة</label>
+        <div class="checks">
+          <label class="check"><input type="checkbox" name="versions[]" value="Table" /> جدول</label>
+          <label class="check"><input type="checkbox" name="versions[]" value="Screen" /> شاشة</label>
+          <label class="check"><input type="checkbox" name="versions[]" value="Tawasl" /> تواصل</label>
+          <label class="check"><input type="checkbox" name="versions[]" value="Banner" /> بانر</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <label>الإيميل</label>
+        <div class="field">
+          <input type="email" name="email" placeholder="example@ksu.edu.sa" />
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="submitBtn" type="submit">إرسال</button>
+      </div>
+    </form>
+
+    <!-- Footer داخل الكارد: زر تحميل القالب + رقم الإصدار -->
+    <div class="divider"></div>
+    <div class="card-footer">
+      <a class="btn-link" href="https://github.com/haithamx/html-library/raw/refs/heads/main/DSD.xlsx" target="_blank" rel="noopener">
+        <img src="https://raw.githubusercontent.com/haithamx/html-library/refs/heads/main/Microsoft_Office_Excel_(2019%E2%80%93present).svg"
+             alt="Excel Logo">
+        تحميل القالب
+      </a>
+      <div class="version">الإصدار: 1.0.0.0.1 Beta</div>
+    </div>
+  </div>
+
+  <!-- Overlay أثناء الإرسال -->
+  <div class="overlay" id="overlay" aria-hidden="true" role="dialog">
+    <div class="dialog" role="status" aria-live="polite">
+      <div class="spinner"></div>
+      <div style="font-size:16px; color:#0b2239; font-weight:600;">بتم إرسال الطلب…</div>
+      <div style="font-size:13px; color:#5e6b76; margin-top:6px;">الرجاء عدم إغلاق الصفحة</div>
+    </div>
+  </div>
+
+<script>
+  (function () {
+    const form = document.getElementById('reqForm');
+    const btn  = document.getElementById('submitBtn');
+    const ov   = document.getElementById('overlay');
+
+    form.addEventListener('submit', function () {
+      if (form.checkValidity()) {
+        btn.disabled = true;
+        btn.textContent = 'يتم الإرسال…';
+        ov.classList.add('show');
+        ov.setAttribute('aria-hidden', 'false');
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
