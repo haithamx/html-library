@@ -42,23 +42,16 @@
     border-radius: var(--radius);
     box-shadow: 0 18px 40px rgba(0,0,0,.18);
     position:relative;
-    padding: 18px 18px 16px; /* قلّلنا التوب لأن فيه بنر */
+    padding: 0 18px 16px;           /* بدون مسافة من الأعلى عشان البنر يلتصق */
+    overflow: hidden;               /* يخلي البنر يتبع انحناء الحواف */
   }
 
-  /* ===== بنر علوي قابل للتبديل ===== */
-  .banner{
-    width:100%;
-    border-radius:16px;
-    overflow:hidden;
-    background:#f1f3f5;
-    /* اختياري: تثبيت نسبة العرض/الارتفاع مع قص ذكي */
-    aspect-ratio: 16 / 5;         /* غيّرها 16/6 أو احذفها لو تبي الارتفاع حسب الصورة */
-  }
+  /* ===== بنر علوي بدون قص وملاصق للكارد ===== */
+  .banner{ width:100%; }
   .banner img{
     width:100%;
-    height:100%;
-    display:block;
-    object-fit:cover;              /* يقص زيادة الطول/العرض ويحافظ على جمالية البنر */
+    height:auto;                    /* لا قص إطلاقًا */
+    display:block;                  /* يمنع فراغات تحت الصورة */
   }
 
   form{ display:grid; gap:14px; margin-top:16px; }
@@ -144,11 +137,16 @@
 
   <div class="card">
     <!-- ===== البنر (غيّر رابط الصورة هنا) ===== -->
-    <div class="banner">
-      <img src="https://raw.githubusercontent.com/haithamx/html-library/refs/heads/main/Br01.png" alt="Banner">
-      <!-- استبدل الرابط بصورة البنر التي تصممها -->
-      <!-- ملاحظة: لو حاب الارتفاع يتبع الصورة بدون قص، احذف خاصية aspect-ratio من .banner -->
-    </div>
+.banner {
+  width: 100%;
+  height: 120px; /* عدّلها حسب مقاس البنر */
+  background: url('https://raw.githubusercontent.com/haithamx/html-library/refs/heads/main/Br01.png') no-repeat center;
+  background-size: cover; /* عشان يملي العرض كامل بدون قص */
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+}
+
 
     <!-- الفورم -->
     <form id="reqForm" action="https://aihaitham.app.n8n.cloud/webhook-test/dsd/submit" method="post" enctype="multipart/form-data">
