@@ -45,10 +45,24 @@
     padding: 28px 28px 16px; /* مساحة لفوتر الكارد */
   }
 
-  h2{
-    margin:10px 0 18px; font-size:22px; color:var(--text);
-    text-align:center; font-weight:bold;
-  }
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-family: 'GEDinarOne', sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.header h2 {
+  font-family: 'GEDinarOne', sans-serif;
+  font-size: 20px;
+  font-weight: normal;
+  margin: 5px 0 0 0;
+}
 
   form{ display:grid; gap:14px; }
   label{ font-size:14px; color:var(--muted); font-weight:500; }
@@ -136,8 +150,10 @@
       <img src="https://raw.githubusercontent.com/haithamx/html-library/refs/heads/main/docs/KSU_ShieldLogo_Colour_RGB.png" alt="Logo" style="height:80px;">
     </div>
 
-    <h2>وحدة التصميم الفني والنشر</h2>
-
+   <div class="header">
+  <h1>عمادة تطوير المهارات</h1>
+  <h2>وحدة التصميم الفني والنشر</h2>
+</div>
     <!-- الفورم -->
     <form id="reqForm" action="https://aihaitham.app.n8n.cloud/webhook-test/dsd/submit" method="post" enctype="multipart/form-data">
       <div class="row">
