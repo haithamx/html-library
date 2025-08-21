@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<title>جدول الدورات</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+  @font-face {
+    font-family: 'GEDinarOne';
+    src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Regular.otf') format('opentype');
+  }
+  @font-face {
+    font-family: 'GEDinarOne';
+    src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Medium.otf') format('opentype');
+    font-weight: 500;
+  }
+  @font-face {
+    font-family: 'GEDinarOne';
+    src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Bold.otf') format('opentype');
+    font-weight: bold;
+  }
+
+  .header, 
+  .header span {
+    font-family: 'GEDinarOne', Arial, sans-serif;
+    font-weight: bold;
+  }
+  body, thead th, tbody td { font-family: 'GEDinarOne', Arial, sans-serif; }
+
+  /* ====== أساسيات الصفحة ====== */
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'GE Dinar One', Arial, sans-serif;
+    background: #fff;
+    width: 906px;
+    direction: rtl;
+  }
+
+  /* ====== الهيدر ====== */
+  .header {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2380/604;
+    height: auto;
+    background-image: url('{{headerUrl}}');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center top;
+  }
+  .header .month-text {
+    position: absolute;
+    top: 60%; left: 25%;
+    transform: translate(-50%, -50%);
+    color: #898989;
+    font-size: 22px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* ====== الجدول ====== */
+  table {
+    width: calc(100% - 24px);
+    margin: 0 16px 0 16px;
+    border-collapse: collapse;
+    font-size: 16px;
+    text-align: center;
+  }
+  thead th {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-weight: 700;
+    color: #fff;
+  }
+  tbody td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  tbody tr:nth-child(even) { background-color: #f9f9f9; }
+  tbody tr:hover { background-color: #e8f0fe; }
+
+  /* عمود "م" أضيق قليلاً */
+  tbody td:first-child, thead th:first-child { width: 48px; }
+
+  /* ⇦ الإضافة المهمة: اجعل تاريخ الدورة RTL */
+  table thead th:nth-child(4),
+  table tbody td:nth-child(4){
+    direction: rtl;
+    unicode-bidi: isolate-override;
+  }
+
+  /* ====== الفوتر ====== */
+  .footer {
+    width: 100%;
+    aspect-ratio: 2380/376;
+    height: auto;
+    background-image: url('{{footerUrl}}');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top center;
+    margin-top: 0;
+  }
+
+  /* ====== تدرجات العناوين ====== */
+  body.Staff thead    { background: linear-gradient(90deg, #007FBA, #005177) !important; }
+  body.Faculty thead  { background: linear-gradient(90deg, #748995, #2C3338) !important; }
+  body.Students thead { background: linear-gradient(90deg, #00AE97, #006D5F) !important; }
+  body.Leader thead   { background: linear-gradient(90deg, #523527, #74584B) !important; }
+</style>
+</head>
+
+<body class="{{audienceClass}}">
+  <!-- الهيدر -->
+  <div class="header">
+    <div class="month-text">لشهر {{month}}</div>
+  </div>
+
+  <!-- الجدول -->
+  <table>
+    <thead>
+      <tr>
+        <th>م</th>
+        <th>عنوان الدورة</th>
+        <th>وقت الدورة</th>
+        <th>تاريخ الدورة</th>
+        <th>مكان الدورة</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${tbody}
+    </tbody>
+  </table>
+
+  <!-- الفوتر -->
+  <div class="footer"></div>
+  <script>
+    window.addEventListener('load', function () {
+      setTimeout(function(){ ScreenshotReady && ScreenshotReady(); }, 300);
+    });
+  </script>
+</body>
+</html>
