@@ -20,7 +20,7 @@
     font-weight: bold;
   }
 
-  .header, 
+  .header,
   .header span {
     font-family: 'GEDinarOne', Arial, sans-serif;
     font-weight: bold;
@@ -60,7 +60,7 @@
   /* ====== الجدول ====== */
   table {
     width: calc(100% - 24px);
-    margin: 0 16px 0 16px;
+    margin: 0 16px 0 16px;      /* فراغ بسيط يمين ويسار فقط */
     border-collapse: collapse;
     font-size: 16px;
     text-align: center;
@@ -86,11 +86,12 @@
   /* عمود "م" أضيق قليلاً */
   tbody td:first-child, thead th:first-child { width: 48px; }
 
-  /* ⇦ الإضافة المهمة: اجعل تاريخ الدورة RTL */
+  /* ← المهم: خلي عمود "تاريخ الدورة" LTR عشان ما تنقلب الأرقام */
   table thead th:nth-child(4),
   table tbody td:nth-child(4){
-    direction: rtl;
-    unicode-bidi: isolate-override;
+    direction: ltr;
+    unicode-bidi: embed;
+    text-align: center;
   }
 
   /* ====== الفوتر ====== */
@@ -139,7 +140,7 @@
   <div class="footer"></div>
   <script>
     window.addEventListener('load', function () {
-      setTimeout(function(){ ScreenshotReady && ScreenshotReady(); }, 300);
+      setTimeout(function(){ if (typeof ScreenshotReady === 'function') ScreenshotReady(); }, 300);
     });
   </script>
 </body>
