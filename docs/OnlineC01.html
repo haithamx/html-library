@@ -24,8 +24,7 @@
 }
 
 :root{
-  --brand:#60346E;        /* بنفسجي القيادات */
-  --brand2:#4b2b66;
+  --brand:#60346E; --brand2:#4b2b66;
   --card:#ffffff; --text:#0b2239; --muted:#5e6b76; --radius:22px;
   --bg:#eef2f7;
 }
@@ -49,18 +48,17 @@ body{
   overflow:hidden;
 }
 
-/* ===== بنر علوي (اختياري) ===== */
+/* ===== بنر علوي ===== */
 .banner{
-  width:100%; aspect-ratio: 3.2/1; background:#2f1b3b; position:relative;
-  display:flex; align-items:center; justify-content:center;
+  width:100%; aspect-ratio: 3.2/1;
   background-image: url('https://raw.githubusercontent.com/haithamx/html-library/refs/heads/main/online/Leader%20Online01.jpg');
   background-size: cover; background-position:center;
+  display:flex; align-items:center; justify-content:center;
 }
 .banner::after{
   content:"دورة عن بُعد – Online";
   color:#fff; font-weight:700; font-size: clamp(18px, 3.2vw, 26px);
   padding:8px 14px; background:rgba(0,0,0,.35); border-radius:12px;
-  letter-spacing:.2px;
 }
 
 .content{ padding: 18px 18px 6px; }
@@ -81,7 +79,6 @@ select, textarea{
 }
 textarea{ min-height: 120px; line-height:1.6; }
 
-/* صفين */
 .grid-2{ display:grid; gap:12px; grid-template-columns: 1fr 1fr; }
 @media (max-width:560px){ .grid-2{ grid-template-columns: 1fr; } }
 
@@ -106,10 +103,7 @@ button[type="submit"]:disabled{ opacity:.6; cursor:not-allowed }
   display:flex; align-items:center; justify-content:space-between;
   gap:10px; flex-wrap:wrap; padding: 0 18px 16px;
 }
-.version{
-  font-size:12px; color:#7a8894;
-  font-family: Arial, sans-serif; direction:ltr; unicode-bidi:plaintext;
-}
+.version{ font-size:12px; color:#7a8894; font-family: Arial, sans-serif; }
 
 /* ===== Overlay أثناء الإرسال ===== */
 .overlay{
@@ -132,15 +126,14 @@ button[type="submit"]:disabled{ opacity:.6; cursor:not-allowed }
 <body>
 
   <div class="card">
-    <!-- بنر علوي -->
     <div class="banner" aria-label="هوية النسخة Online"></div>
 
     <div class="content">
-  <form id="onlineForm"
-        action="https://aihaitham.app.n8n.cloud/webhook-test/OnlineC01"
-        method="post"
-        accept-charset="UTF-8"
-        autocomplete="off">
+      <form id="onlineForm"
+            action="https://aihaitham.app.n8n.cloud/webhook-test/OnlineC01"
+            method="post"
+            accept-charset="UTF-8"
+            autocomplete="off">
 
         <!-- audience -->
         <div>
@@ -180,6 +173,14 @@ button[type="submit"]:disabled{ opacity:.6; cursor:not-allowed }
           </div>
         </div>
 
+        <!-- general goal -->
+        <div>
+          <label>الهدف العام للدورة</label>
+          <div class="field">
+            <textarea name="course_goal" placeholder="اكتب الهدف العام للدورة بشكل مختصر وواضح…" required></textarea>
+          </div>
+        </div>
+
         <!-- topics -->
         <div>
           <label>محاور الدورة</label>
@@ -189,10 +190,8 @@ button[type="submit"]:disabled{ opacity:.6; cursor:not-allowed }
           <div class="hint">ملاحظة: كل سطر = محور. سيتم تحويلها تلقائيًا إلى عناصر قائمة &lt;li&gt; في التصميم.</div>
         </div>
 
-        <!-- versions: Online ثابتة -->
         <input type="hidden" name="versions" value="Online" />
 
-        <!-- (اختياري) إيميل -->
         <div>
           <label>الإيميل (اختياري لنسخة الرد)</label>
           <div class="field">
@@ -207,12 +206,11 @@ button[type="submit"]:disabled{ opacity:.6; cursor:not-allowed }
 
       <div class="divider"></div>
       <div class="card-footer">
-        <div class="version">Online Form • v1.0.0</div>
+        <div class="version">Online Form • v1.0.1</div>
       </div>
     </div>
   </div>
 
-  <!-- Overlay أثناء الإرسال -->
   <div class="overlay" id="overlay" aria-hidden="true" role="dialog">
     <div class="dialog" role="status" aria-live="polite">
       <div class="spinner"></div>
