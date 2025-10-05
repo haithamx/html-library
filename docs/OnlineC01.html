@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<title>نموذج دورة عن بُعد – Online</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- ====== خطوط GE Dinar One ====== -->
+<style>
+@font-face {
+  font-family: 'GEDinarOne';
+  src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Regular.otf') format('opentype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'GEDinarOne';
+  src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Medium.otf') format('opentype');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'GEDinarOne';
+  src: url('https://haithamx.github.io/my-fonts/GE-Dinar-One-Bold.otf') format('opentype');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+:root{
+  --brand:#60346E;        /* بنفسجي القيادات */
+  --brand2:#4b2b66;
+  --card:#ffffff; --text:#0b2239; --muted:#5e6b76; --radius:22px;
+  --bg:#eef2f7;
+}
+
+* { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+html,body{height:100%}
+body{
+  margin:0; padding:22px;
+  font-family:'GEDinarOne', Arial, sans-serif;
+  background: linear-gradient(135deg, var(--brand2), var(--brand));
+  color: var(--text);
+  display:grid; place-items:center;
+}
+
+/* ===== البطاقة ===== */
+.card{
+  width:min(760px, 94vw);
+  background:var(--card);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 48px rgba(0,0,0,.18);
+  overflow:hidden;
+}
+
+/* ===== بنر علوي (اختياري) ===== */
+.banner{
+  width:100%; aspect-ratio: 3.2/1; background:#2f1b3b; position:relative;
+  display:flex; align-items:center; justify-content:center;
+  background-image: url('https://raw.githubusercontent.com/haithamx/html-library/refs/heads/main/online/Leader%20Online01.jpg');
+  background-size: cover; background-position:center;
+}
+.banner::after{
+  content:"دورة عن بُعد – Online";
+  color:#fff; font-weight:700; font-size: clamp(18px, 3.2vw, 26px);
+  padding:8px 14px; background:rgba(0,0,0,.35); border-radius:12px;
+  letter-spacing:.2px;
+}
+
+.content{ padding: 18px 18px 6px; }
+
+/* ===== النموذج ===== */
+form{ display:grid; gap:14px; }
+label{ font-size:14px; color:var(--muted); font-weight:500; }
+
+.field{
+  background:#f8fbff; border:1px solid #e6eef5;
+  border-radius:12px; padding:12px 14px;
+}
+input[type="text"],
+input[type="email"],
+select, textarea{
+  width:100%; font-family:inherit; font-size:16px;
+  border:none; background:transparent; outline:none; resize:vertical;
+}
+textarea{ min-height: 120px; line-height:1.6; }
+
+/* صفين */
+.grid-2{ display:grid; gap:12px; grid-template-columns: 1fr 1fr; }
+@media (max-width:560px){ .grid-2{ grid-template-columns: 1fr; } }
+
+.hint{ font-size:12px; color:#7a8894; margin-top:6px; }
+
+/* ===== الأزرار ===== */
+.actions{ display:flex; justify-content:center; gap:10px; margin-top:6px; }
+button[type="submit"]{
+  background: linear-gradient(90deg, var(--brand) 0%, #8b5aa0 100%);
+  color:#fff; border:none; border-radius:14px;
+  padding:12px 22px; font-size:16px; cursor:pointer;
+  box-shadow:0 10px 22px rgba(0,0,0,.18);
+  transition: transform .05s ease-in-out, opacity .2s;
+  font-family:'GEDinarOne', sans-serif; font-weight:700;
+}
+button[type="submit"]:active{ transform:scale(.99) }
+button[type="submit"]:disabled{ opacity:.6; cursor:not-allowed }
+
+/* ===== فوتر البطاقة ===== */
+.divider{ height:1px; background:#e6eef5; margin:14px 0 10px; }
+.card-footer{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:10px; flex-wrap:wrap; padding: 0 18px 16px;
+}
+.version{
+  font-size:12px; color:#7a8894;
+  font-family: Arial, sans-serif; direction:ltr; unicode-bidi:plaintext;
+}
+
+/* ===== Overlay أثناء الإرسال ===== */
+.overlay{
+  position:fixed; inset:0; background:rgba(11,34,57,.45);
+  display:none; place-items:center; z-index:9999; backdrop-filter: blur(2px);
+}
+.overlay.show{ display:grid; }
+.dialog{
+  background:#fff; border-radius:18px; padding:22px 26px; width:min(360px, 88vw);
+  box-shadow:0 18px 40px rgba(0,0,0,.25); text-align:center;
+}
+.spinner{
+  width:36px; height:36px; margin:0 auto 12px;
+  border:4px solid #e6eef5; border-top-color: var(--brand);
+  border-radius:50%; animation: spin 1s linear infinite;
+}
+@keyframes spin{ to{ transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <!-- بنر علوي -->
+    <div class="banner" aria-label="هوية النسخة Online"></div>
+
+    <div class="content">
+      <form id="onlineForm"
+            action="https://aihaitham.app.n8n.cloud/webhook-test/OnlineC01"  <!-- غيّر إذا لزم -->
+            method="post">
+
+        <!-- audience -->
+        <div>
+          <label>الفئة المستهدفة</label>
+          <div class="field">
+            <select name="audience" required>
+              <option value="" disabled selected>اختر الفئة</option>
+              <option value="القيادات الإدارية والأكاديمية">القيادات الإدارية والأكاديمية</option>
+              <option value="أعضاء هيئة التدريس">أعضاء هيئة التدريس</option>
+              <option value="الموظفين">الموظفين</option>
+              <option value="الطلاب">الطلاب</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- title -->
+        <div>
+          <label>عنوان الدورة</label>
+          <div class="field">
+            <input type="text" name="course_title" placeholder="مثال: مهارات العرض الفعال عن بُعد" required />
+          </div>
+        </div>
+
+        <!-- date + time -->
+        <div class="grid-2">
+          <div>
+            <label>تاريخ الدورة</label>
+            <div class="field">
+              <input type="text" name="course_date" placeholder="مثال: 2025/11/14–18" required />
+            </div>
+          </div>
+          <div>
+            <label>وقت الدورة</label>
+            <div class="field">
+              <input type="text" name="course_time" placeholder="مثال: 10:00–12:00" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- topics -->
+        <div>
+          <label>محاور الدورة</label>
+          <div class="field">
+            <textarea name="course_topics" placeholder="اكتب كل محور في سطر مستقل…" required></textarea>
+          </div>
+          <div class="hint">ملاحظة: كل سطر = محور. سيتم تحويلها تلقائيًا إلى عناصر قائمة &lt;li&gt; في التصميم.</div>
+        </div>
+
+        <!-- versions: Online ثابتة -->
+        <input type="hidden" name="versions" value="Online" />
+
+        <!-- (اختياري) إيميل -->
+        <div>
+          <label>الإيميل (اختياري لنسخة الرد)</label>
+          <div class="field">
+            <input type="email" name="email" placeholder="example@ksu.edu.sa" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="submitBtn" type="submit">إرسال الطلب</button>
+        </div>
+      </form>
+
+      <div class="divider"></div>
+      <div class="card-footer">
+        <div class="version">Online Form • v1.0.0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay أثناء الإرسال -->
+  <div class="overlay" id="overlay" aria-hidden="true" role="dialog">
+    <div class="dialog" role="status" aria-live="polite">
+      <div class="spinner"></div>
+      <div style="font-size:16px; color:#0b2239; font-weight:600;">يتم إرسال الطلب…</div>
+      <div style="font-size:13px; color:#5e6b76; margin-top:6px;">الرجاء عدم إغلاق الصفحة</div>
+    </div>
+  </div>
+
+<script>
+  (function () {
+    const form = document.getElementById('onlineForm');
+    const btn  = document.getElementById('submitBtn');
+    const ov   = document.getElementById('overlay');
+
+    form.addEventListener('submit', function () {
+      if (form.checkValidity()) {
+        btn.disabled = true;
+        btn.textContent = 'جارٍ الإرسال…';
+        ov.classList.add('show');
+        ov.setAttribute('aria-hidden', 'false');
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
