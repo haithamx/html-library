@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<title>{{courseTitle}}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<style>
+  /* ===== إعدادات عامة ===== */
+  :root{
+    --canvas-w: 1920px;
+    --canvas-h: 1038px;
+
+    /* الخلفية */
+    --bg-url: url('https://raw.githubusercontent.com/haithamx/html-library/refs/heads/main/online/Leader%20Online01.jpg');
+
+    /* شريط عنوان الدورة */
+    --title-x: 636px;
+    --title-y: 258px;
+    --title-w: 1227px;
+    --title-h: 79px;
+    --title-radius: 10px;
+    --title-bg: #60346E;
+    --title-font: 26px;
+
+    /* الهدف العام */
+    --goal-x: 933px;
+    --goal-y: 345px;
+    --goal-w: 930px;
+    --goal-h: 125px;
+
+    /* المحاور */
+    --topics-x: 933px;
+    --topics-y: 480px;
+    --topics-w: 930px;
+    --topics-h: 495px;
+
+    /* التاريخ والوقت */
+    --date-x: 594px;
+    --date-y: 846px;
+    --date-w: 239px;
+    --date-h: 58px;
+
+    --time-x: 594px;
+    --time-y: 916px;
+    --time-w: 239px;
+    --time-h: 58px;
+
+    /* ألوان ونصوص */
+    --radius: 10px;
+    --card-bg: #fff;
+    --text: #2c3a50;
+    --muted: #77839a;
+    --brand: #60346e;
+  }
+
+  html,body{margin:0;padding:0}
+  body{
+    width: var(--canvas-w);
+    height: var(--canvas-h);
+    background-image: var(--bg-url);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: Tahoma, Arial, sans-serif;
+    color: var(--text);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ===== العنوان ===== */
+  .title-bar{
+    position: absolute;
+    left: var(--title-x);
+    top: var(--title-y);
+    width: var(--title-w);
+    height: var(--title-h);
+    background: var(--title-bg);
+    border-radius: var(--title-radius);
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: var(--title-font);
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* ===== الهدف العام ===== */
+  .goal{
+    position: absolute;
+    left: var(--goal-x);
+    top: var(--goal-y);
+    width: var(--goal-w);
+    height: var(--goal-h);
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 14px 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .goal h3{
+    margin: 0 0 6px 0;
+    font-size: 20px;
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .goal p{
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  /* ===== محاور الدورة ===== */
+  .topics{
+    position: absolute;
+    left: var(--topics-x);
+    top: var(--topics-y);
+    width: var(--topics-w);
+    height: var(--topics-h);
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 16px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .topics h3{
+    margin: 0 0 8px 0;
+    font-size: 20px;
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .topics ul{
+    margin: 0; padding: 0 18px;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+  .topics li{ margin: 6px 0; }
+
+  /* ===== التاريخ والوقت ===== */
+  .small-card{
+    position: absolute;
+    width: var(--date-w);
+    height: var(--date-h);
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    color: var(--text);
+    overflow: hidden;
+    text-align: center;
+  }
+  .date{ left: var(--date-x); top: var(--date-y); }
+  .time{ left: var(--time-x); top: var(--time-y); }
+</style>
+</head>
+<body>
+
+  <!-- العنوان -->
+  <div class="title-bar"><span>{{courseTitle}}</span></div>
+
+  <!-- الهدف العام -->
+  <div class="goal">
+    <h3>الهدف العام للدورة:</h3>
+    <p>{{courseGoal}}</p>
+  </div>
+
+  <!-- المحاور -->
+  <div class="topics">
+    <h3>محاور الدورة:</h3>
+    <ul>
+      ${topics}
+    </ul>
+  </div>
+
+  <!-- التاريخ -->
+  <div class="small-card date">{{courseDate}}</div>
+
+  <!-- الوقت -->
+  <div class="small-card time">{{courseTime}}</div>
+
+</body>
+</html>
