@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<title>{{courseTitle}}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<style>
+  :root{
+    --canvas-w: 1920px;
+    --canvas-h: 1038px;
+    --bg-url: url('https://raw.githubusercontent.com/haithamx/html-library/refs/heads/main/online/Leader%20Online01.jpg');
+
+    /* عناصر التخطيط */
+    --title-x: 636px; --title-y: 258px; --title-w: 1227px; --title-h: 79px;
+    --goal-x: 933px;  --goal-y: 345px;  --goal-w: 930px;  --goal-h: 125px;
+    --topics-x: 933px; --topics-y: 480px; --topics-w: 930px; --topics-h: 495px;
+    --date-x: 594px;  --date-y: 846px;  --date-w: 239px;  --date-h: 58px;
+    --time-x: 594px;  --time-y: 916px;  --time-w: 239px;  --time-h: 58px;
+
+    --radius: 10px;
+    --card-bg: #fff;
+    --text: #2c3a50;
+    --muted: #77839a;
+    --brand: #60346e;
+  }
+
+  html,body{margin:0;padding:0}
+  body{
+    width: var(--canvas-w);
+    height: var(--canvas-h);
+    background-image: var(--bg-url);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: 'Tahoma', Arial, sans-serif;
+    color: var(--text);
+    position: relative;
+    overflow: hidden;
+    direction: rtl; /* افتراضي للعربية */
+  }
+
+  /* ذكاء الاتجاه */
+  [lang="en"], [dir="ltr"] {
+    direction: ltr;
+    text-align: left;
+  }
+  [lang="ar"], [dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+  }
+
+  /* ===== العنوان ===== */
+  .title-bar{
+    position: absolute;
+    left: var(--title-x);
+    top: var(--title-y);
+    width: var(--title-w);
+    height: var(--title-h);
+    background: var(--brand);
+    border-radius: var(--radius);
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  /* ===== الهدف العام ===== */
+  .goal{
+    position: absolute;
+    left: var(--goal-x);
+    top: var(--goal-y);
+    width: var(--goal-w);
+    height: var(--goal-h);
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 16px 24px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .goal h3{
+    margin: 0 0 6px 0;
+    font-size: 20px;
+    color: var(--muted);
+    font-weight: 700;
+    text-align: inherit;
+  }
+  .goal p{
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--text);
+    text-align: inherit;
+  }
+
+  /* ===== المحاور ===== */
+  .topics{
+    position: absolute;
+    left: var(--topics-x);
+    top: var(--topics-y);
+    width: var(--topics-w);
+    height: var(--topics-h);
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 16px 24px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .topics h3{
+    margin: 0 0 8px 0;
+    font-size: 20px;
+    color: var(--muted);
+    font-weight: 700;
+    text-align: inherit;
+  }
+  .topics ul{
+    margin: 0; padding: 0 22px;
+    font-size: 20px;
+    line-height: 1.6;
+    list-style-position: inside;
+    text-align: inherit;
+  }
+  .topics li{ margin: 6px 0; }
+
+  /* ===== التاريخ والوقت ===== */
+  .small-card{
+    position: absolute;
+    width: var(--date-w);
+    height: var(--date-h);
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    color: var(--text);
+    overflow: hidden;
+    text-align: center;
+  }
+  .date{ left: var(--date-x); top: var(--date-y); }
+  .time{ left: var(--time-x); top: var(--time-y); }
+</style>
+</head>
+<body>
+
+  <!-- العنوان -->
+  <div class="title-bar" lang="ar">{{courseTitle}}</div>
+
+  <!-- الهدف العام -->
+  <div class="goal" lang="ar">
+    <h3>الهدف العام للدورة:</h3>
+    <p>{{courseGoal}}</p>
+  </div>
+
+  <!-- المحاور -->
+  <div class="topics" lang="ar">
+    <h3>محاور الدورة:</h3>
+    <ul>
+      ${topics}
+    </ul>
+  </div>
+
+  <!-- التاريخ -->
+  <div class="small-card date">{{courseDate}}</div>
+
+  <!-- الوقت -->
+  <div class="small-card time">{{courseTime}}</div>
+
+<script>
+  // ✅ كود ذكي بسيط يغير الاتجاه تلقائيًا حسب اللغة
+  document.querySelectorAll('[lang]').forEach(el => {
+    const text = el.textContent || '';
+    const isArabic = /[\u0600-\u06FF]/.test(text);
+    el.setAttribute('dir', isArabic ? 'rtl' : 'ltr');
+  });
+</script>
+
+</body>
+</html>
